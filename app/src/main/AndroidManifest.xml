@@ -9,11 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".activities.SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
-        <activity android:name=".activities.DetailsOneGroup" />
-        <activity android:name=".activities.DetailsGroups" />
+        <activity android:name=".activities.DetailsActivity"></activity>
+        <activity android:name=".model.Todo" />
+        <activity android:name=".model.Group" />
+        <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

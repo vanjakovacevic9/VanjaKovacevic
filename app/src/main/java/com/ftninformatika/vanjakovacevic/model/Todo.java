@@ -57,47 +57,83 @@ public class Todo extends Activity {
 
     }
 
-    public static String getTableName() {
-        return TABLE_NAME;
+    public int getId() {
+        return id;
     }
 
-    public static String getTodoId() {
-        return TODO_ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public static String getTodoIme() {
-        return TODO_IME;
+    public String getIme() {
+        return ime;
     }
 
-    public static String getOPIS() {
-        return OPIS;
+    public void setIme(String ime) {
+        this.ime = ime;
     }
 
-    public static String getPRIORITET() {
-        return PRIORITET;
+    public String getOpis() {
+        return opis;
     }
 
-    public static String getDatumKreiranja() {
-        return DATUM_KREIRANJA;
+    public void setOpis(String opis) {
+        this.opis = opis;
     }
 
-    public static String getVremeKreiranja() {
-        return VREME_KREIRANJA;
+    public String getPrioriteti() {
+        return prioriteti;
     }
 
-    public static String getDatumZavrsetka() {
-        return DATUM_ZAVRSETKA;
+    public void setPrioriteti(String prioriteti) {
+        this.prioriteti = prioriteti;
     }
 
-    public static String getVremeZavrsetka() {
-        return VREME_ZAVRSETKA;
+    public String getDatumK() {
+        return datumK;
     }
 
-    public static String getSTATUS() {
-        return STATUS;
+    public void setDatumK(String datumK) {
+        this.datumK = datumK;
     }
 
+    public String getVremeK() {
+        return vremeK;
+    }
 
+    public void setVremeK(String vremeK) {
+        this.vremeK = vremeK;
+    }
 
+    public String getDatumZ() {
+        return datumZ;
+    }
 
+    public void setDatumZ(String datumZ) {
+        this.datumZ = datumZ;
+    }
+
+    public String getVremeZ() {
+        return vremeZ;
+    }
+
+    public void setVremeZ(String vremeZ) {
+        this.vremeZ = vremeZ;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public ForeignCollection<Todo> getTodos() {
+        return todos;
+    }
+
+    public void setTodos(ForeignCollection<Todo> todos) {
+        this.todos = todos;
+    }
 }

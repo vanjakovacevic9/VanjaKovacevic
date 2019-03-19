@@ -14,12 +14,14 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView listView;
     private List<Group> list;
+
 
     private Toolbar toolbar;
     private ActionBar actionBar;
@@ -71,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar= findViewById(R.id.toolbar_layout);
+        toolbar= findViewById(R.id.main_toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar.setTitle("Grupa TODO zadataka");
         setSupportActionBar(toolbar);
@@ -144,6 +147,59 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private DataBaseHelper getDatabaseHelper() {
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        switch (id) {
+
+            case R.id.menu_add:
+                addItem();
+                break;
+
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                break;
+
+            case 2:
+                //TODO
+                break;
+
+            case 3:
+                //TODO
+                break;
+
+            default:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private DataBaseHelper addItem(){
+        dialog.show();
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String enteredName = etName.getText().toString();
+                Log.d(TAG, "onClick: ENTERED NAME " + enteredName);
+                Todo todo = new Todo();
+                todo.setIme(enteredName);
+
+            }
+    }
+
     public DataBaseHelper getDatabaseHelper() {
         if (databaseHelper == null) {
             databaseHelper = OpenHelperManager.getHelper(this, DataBaseHelper.class);
@@ -171,7 +227,18 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
     }
 
-    private void showAbout() {
+        public void showAbout() {
+
+            new AlertDialog.Builder(this)
+                    .setTitle("About")
+                    .setMessage("Autor: Vanja Kovacevic")
+                    .show();
+        }
+
+        public void showSettings() {
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        }
 
         new AlertDialog.Builder(this)
                 .setTitle("About")
@@ -184,28 +251,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void showStatusMessage(String message) {
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), NOTIFICATION_CHANNEL_ID);
-        builder.setSmallIcon(R.drawable.ic_launcher_background);
-        builder.setContentTitle("Actors App");
-        builder.setContentText(message);
-
-        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_product);
-        builder.setLargeIcon(bm);
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
-                    "Channel human readable title",
-                    NotificationManager.IMPORTANCE_DEFAULT);
-            notificationManager.createNotificationChannel(channel);
-            builder.setChannelId(NOTIFICATION_CHANNEL_ID);
-        }
-
-        notificationManager.notify(0, builder.build());
     }
-
 }
+
 
